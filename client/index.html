@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Articles Review</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Scientific Articles Review Platform</h1>
+        <div class="tabs">
+            <button class="tab-button" onclick="showTab('articles')">Articles</button>
+            <button class="tab-button" onclick="showTab('projects')">Projects</button>
+        </div>
+        <div id="articles" class="tab-content">
+            <h2>Articles</h2>
+            <table id="articles-table">
+                <!-- Articles will be populated here -->
+            </table>
+        </div>
+        <div id="projects" class="tab-content">
+            <h2>Projects</h2>
+            <button onclick="showNewProjectForm()">New Project</button>
+            <table id="projects-table">
+                <!-- Projects will be populated here -->
+            </table>
+        </div>
+    </div>
+
+    <!-- New Project Form -->
+    <div id="new-project-form" class="modal">
+        <form id="new-project">
+            <h2>New Project</h2>
+            <label for="project-title">Project Title</label>
+            <input type="text" id="project-title" name="project-title" required>
+            <label for="article-select">Select Article</label>
+            <select id="article-select" name="article-select" required>
+                <!-- Articles will be populated here -->
+            </select>
+            <label for="team-name">Team Name</label>
+            <input type="text" id="team-name" name="team-name" required>
+            <button type="submit">Create Project</button>
+        </form>
+    </div>
+
+    <!-- Edit Project Form -->
+    <div id="edit-project-form" class="modal">
+        <form id="edit-project">
+            <h2>Edit Project</h2>
+            <label for="edit-project-title">Project Title</label>
+            <input type="text" id="edit-project-title" name="edit-project-title" required>
+            <label for="edit-article-select">Select Article</label>
+            <select id="edit-article-select" name="edit-article-select" required>
+                <!-- Articles will be populated here -->
+            </select>
+            <label for="edit-team-name">Team Name</label>
+            <input type="text" id="edit-team-name" name="edit-team-name" required>
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+
+    <!-- Score Project Form -->
+    <div id="score-project-form" class="modal">
+        <form id="score-project">
+            <h2>Score Project</h2>
+            <div id="statements">
+                <!-- Statements for scoring will be populated here -->
+            </div>
+            <button type="submit">Submit Score</button>
+        </form>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
