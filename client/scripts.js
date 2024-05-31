@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to hide all modals
     function hideModals() {
         console.log('Hiding all modals');
-        document.querySelectorAll('.modal').forEach(modal => modal.style.display = 'none');
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => modal.style.display = 'none');
     }
 
     async function searchArticles() {
@@ -146,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (searchName) {
                 url += `?search=${encodeURIComponent(searchName)}`;
             }
-    
+
             const response = await fetch(url);
             const projects = await response.json();
             const projectsTable = document.getElementById('projects-table');
@@ -176,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Failed to fetch projects', error);
         }
     }
-    
+
 
     // Function to populate the article select dropdown
     async function populateArticleSelect(selectId) {
@@ -357,5 +358,6 @@ document.addEventListener('DOMContentLoaded', function () {
     window.toggleProjectStatus = toggleProjectStatus;
     window.searchArticles = searchArticles;
     window.searchProjects = searchProjects;
+    window.hideModals = hideModals;
 });
 
