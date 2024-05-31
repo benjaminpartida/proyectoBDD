@@ -4,9 +4,18 @@ const projectRoutes = (pool) => {
   const router = express.Router();
 
   // Endpoint to get all projects
+    // Endpoint to get all projects or search for projects
   router.get('/', async (req, res) => {
     try {
-      const result = await pool.query('SELECT * FROM ReviewProjects');
+      let query = 'SELECT * FROM ReviewProjects';
+
+      // Si se proporciona un parámetro de búsqueda en la URL, filtrar por él
+      if (req.query.search) {
+        const searchTerm = req.query.search;
+        query += ` WHERE project_title ILIKE '%${searchTerm}%';`;
+      }
+
+      const result = await pool.query(query);
       res.json(result.rows);
     } catch (err) {
       console.error(err);
@@ -72,23 +81,6 @@ const projectRoutes = (pool) => {
       res.status(500).send('Server Error');
     }
   });
-
-  // Endpoint to score a project
-router.post('/:id/score', async (req, res) => {
-  const { id } = req.params;
-  const { score } = req.body;
-  try {
-      const result = await pool.query(
-          'UPDATE ReviewProjects SET final_score = $1 WHERE review_project_id = $2 RETURNING *',
-          [score, id]
-      );
-      res.json(result.rows[0]);
-  } catch (err) {
-      console.error(err);
-      res.status(500).send('Server Error');
-  }
-});
-
 
   return router;
 };
