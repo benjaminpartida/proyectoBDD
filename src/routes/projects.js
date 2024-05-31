@@ -73,6 +73,23 @@ const projectRoutes = (pool) => {
     }
   });
 
+  // Endpoint to score a project
+router.post('/:id/score', async (req, res) => {
+  const { id } = req.params;
+  const { score } = req.body;
+  try {
+      const result = await pool.query(
+          'UPDATE ReviewProjects SET final_score = $1 WHERE review_project_id = $2 RETURNING *',
+          [score, id]
+      );
+      res.json(result.rows[0]);
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Server Error');
+  }
+});
+
+
   return router;
 };
 
